@@ -1,32 +1,47 @@
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/Screens/Fpswd.dart';
 import 'package:flutter_application_food/Screens/SignUp.dart';
-import 'package:flutter_application_food/Screens/splash.dart';
 import 'package:flutter_application_food/constantes.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
-import 'package:flutter_application_food/widgets/EmailField.dart';
-import 'package:flutter_application_food/widgets/PswField.dart';
-
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+//import 'package:flutter_application_food/Screens/splash.dart';
+//import 'package:flutter_application_food/widgets/EmailField.dart';
+//import 'package:flutter_application_food/widgets/PswField.dart';
+//import 'dart:convert';
+//import 'package:http/http.dart' as http;
 import 'package:flutter_application_food/utils/api.dart';
 
-class LoginScreen extends StatelessWidget {
+
+class LoginScreen extends StatefulWidget {
+  
+   final Icon icon ;
+  final String htxt;
+  final TextInputType type;
+
+  const LoginScreen({Key key, this.icon, this.htxt, this.type}) : super(key: key);
+
+  
+  
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
 
   
 
   //final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();//changed
 
-  get email => null;
-  get password => null;
-
-  BuildContext get context => null;
-
- 
+  //get email => null;
+  //get password => null;
+  //BuildContext get context => null;
+   
+  var email;
+  var password;
+  bool passwordVisible = true ;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +60,9 @@ class LoginScreen extends StatelessWidget {
                height: 300,
                width: 300,),
                SizedBox(height: 20,),
-               EmailField(
+               
+               //replaced by code
+               /*EmailField( 
                   htxt: "email adresse",
                   icon: Icon(
                       Icons.email, 
@@ -54,9 +71,109 @@ class LoginScreen extends StatelessWidget {
      
                       ),
                   type: TextInputType.emailAddress,
-                ),
+                ),*/
 
-                PswField(),
+               
+               Container(
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    width: double.infinity,
+
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [ BoxShadow( 
+                            blurRadius: 15,
+                            color: Colors.grey.withOpacity(0.3),
+                            offset: Offset(5,8), )
+                            ]),
+      
+                    child: TextFormField(
+        
+                        cursorColor: Gris,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: widget.htxt,
+                          hintStyle: TextStyle(fontFamily: 'Montserrat',fontSize: 14,color: Gris,),
+                          icon:widget.icon,
+                           ),
+
+                    keyboardType: widget.type,
+
+                    validator: (emailValue) {  
+                        if (emailValue.isEmpty) {
+                          return 'Please enter email';
+                         }
+                        return null;
+                      },
+
+                         onChanged: (value) {
+                           email = value;
+                             },
+        
+          
+          
+                     ),
+
+                     
+                    ),
+                     
+
+
+
+                //PswField(),
+
+                   Container(
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        width: double.infinity,
+
+                        decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [ BoxShadow( 
+                            blurRadius: 15,
+                            color: Colors.grey.withOpacity(0.3),
+                            offset: Offset(7,8), )]),
+      
+                        child: TextFormField( 
+        
+                            cursorColor: Gris,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "password",
+                                hintStyle: TextStyle(fontFamily: 'Montserrat',fontSize: 14,color: Gris,),
+                                icon: IconButton( 
+                                    icon: Icon(
+                                        passwordVisible ? Icons.visibility : Icons.visibility_off,
+                                      ),
+                                    iconSize: 18,
+                                    onPressed: (){
+                                        setState(() {
+                                          passwordVisible = ! passwordVisible;
+                                       });},      
+                                color: Gris,
+     
+                                ),
+                              ),
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: passwordVisible,
+                            validator: (passwordValue) {
+                                if (passwordValue.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                                  return null;
+                                },
+                            
+                            onChanged: (value) {
+                              password = value;
+                              },
+          
+                        ),
+                   ),
+
+
+
 
                SizedBox(height: 25,),
               Button(
@@ -131,7 +248,7 @@ _showMsg(msg) {
     // var map = new Map<String, dynamic>();
     // map['email'] = email;
     // map['password'] = password;
-    var response = await Network().postData(data, '/orders');
+    var response = await Network().postData(data, '/login');
 
     if (response.statusCode == 200) {
       //var body = json.decode(response.body);
@@ -153,6 +270,7 @@ _showMsg(msg) {
     // setState(() {
     //   _isLoading = false;
     // });
+  
   }
  
 
@@ -160,4 +278,4 @@ _showMsg(msg) {
  
 
 
- 
+ //<application android:usesCleartextTraffic="true"/> in case we can use unsecure http

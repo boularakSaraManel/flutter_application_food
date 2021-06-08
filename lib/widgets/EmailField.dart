@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/constantes.dart';
-import 'package:flutter_application_food/utils/api.dart';
+//import 'package:flutter_application_food/utils/api.dart';
 
 
 class EmailField extends StatefulWidget {
   final Icon icon ;
   final String htxt;
   final TextInputType type;
+
+  static var email;
+
+  static var eMail;
+
   
   const EmailField({Key key ,this.icon, this.htxt , this.type}) : super(key: key);
 
@@ -16,6 +21,16 @@ class EmailField extends StatefulWidget {
 
 class _EmailFieldState extends State<EmailField> {
   var email;
+
+//getter and setter for email
+  String get eMail {
+    return email;
+  }
+   set eMail(String password) {
+    this.email=email;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     

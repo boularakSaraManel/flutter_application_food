@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/constantes.dart';
-import 'package:flutter_application_food/utils/api.dart';
+//import 'package:flutter_application_food/utils/api.dart';
 
 
 class PswField extends StatefulWidget {
+  static var psw;
+
+
+
   @override
   _PswFieldState createState() => _PswFieldState();
 }
 
 
 class _PswFieldState extends State<PswField> {
-  @override
-  
   bool passwordVisible = true ;
-  var password ; 
+   var password ; 
 
- 
-  Widget build(BuildContext context) {
+ //getter and setter for password
+  String get psw {
+    return password;
+  }
+   set psw(String password) {
+    this.password=password;
+  }
+
+  @override
+
+   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       padding: EdgeInsets.symmetric(horizontal: 12),

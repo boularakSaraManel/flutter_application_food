@@ -1,5 +1,7 @@
  import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Network {
   
@@ -7,10 +9,12 @@ class Network {
   //if you are using android studio emulator, change localhost to 10.0.2.2
   var token;
 
-  _getToken() async {
-    //SharedPreferences localStorage = await SharedPreferences.getInstance();
-    //token = jsonDecode(localStorage.getString('token'))['token'];
-  }
+  /*_getToken() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance(); //removed comment for those 2 lines
+    token = jsonDecode(newMethod(localStorage).getString('token'))['token'];
+  }*/
+
+  SharedPreferences newMethod(SharedPreferences localStorage) => localStorage;
 
   postData(data, apiUrl) async {
     var fullUrl = _url + apiUrl;

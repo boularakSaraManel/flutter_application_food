@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/Screens/Rpswd.dart';
-import 'package:flutter_application_food/Screens/splash.dart';
+//import 'package:flutter_application_food/Screens/splash.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
 import 'package:flutter_application_food/widgets/EmailField.dart';
 import 'package:flutter_application_food/constantes.dart';
